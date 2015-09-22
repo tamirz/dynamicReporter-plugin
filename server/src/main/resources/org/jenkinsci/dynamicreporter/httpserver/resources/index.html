@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+		<script type="text/javascript" src="jquery/js/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="jquery/js/jquery-ui-1.10.0.custom.js"></script>
+		<script type="text/javascript" src="js/testEvents.js"></script>
+		<script type="text/javascript" src="js/httpRestEventsReceiver.js"></script>
+		<link rel="stylesheet" type="text/css" href="jquery/css/ui-lightness/jquery-ui-1.10.0.custom.css" />
+<body>
+
+        <div id="reports" />
+        <script type="text/javascript">
+            jQuery(function() {
+                jQuery("#reports").html('<iframe src="/userContent/${it.buildNumber}/index.html" style="height: 1400px; width: 100%; border-width: 0;"></iframe>');
+            });
+        </script>
+
+</body>
+</html>
+
