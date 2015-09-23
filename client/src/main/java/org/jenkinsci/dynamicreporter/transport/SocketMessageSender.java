@@ -39,7 +39,7 @@ public class SocketMessageSender extends MessageSender {
 				} else {
 					try {
 						Thread.sleep(50);
-					} catch (InterruptedException ie) {
+					} catch (InterruptedException ignored) {
 					}
 				}
 			}
