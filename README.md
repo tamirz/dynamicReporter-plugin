@@ -1,4 +1,4 @@
 dynamicReporter
 ===============
 
-This jenkins plugin allows you to reflects reportNG reports during the project test run
+This jenkins plugin allows you to display reportNG reports during a build of a project.
