@@ -3,21 +3,22 @@
 
 	<groupId>org.jenkins-ci.plugins</groupId>
 	<artifactId>dynamicReporter-parent</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2</version>
 	<packaging>pom</packaging>
 	<name>Dynamic Reporter Parent POM</name>
 
-	<distributionManagement>
-		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>maven.jenkins-ci.org</id>
-			<url>http://maven.jenkins-ci.org:8081/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>maven.jenkins-ci.org</id>
-			<url>http://maven.jenkins-ci.org:8081/content/repositories/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
+    <distributionManagement>
+        <repository>
+            <id>CI-Artifactory</id>
+            <name>CI-Artifactory-releases</name>
+            <url>http://10.0.2.162:8081/artifactory/libs-release-local</url>
+        </repository>
+        <snapshotRepository>
+            <id>CI-Artifactory</id>
+            <name>CI-Artifactory-snapshots</name>
+            <url>http://10.0.2.162:8081/artifactory/libs-release-local</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 	<build>
 		<plugins>
