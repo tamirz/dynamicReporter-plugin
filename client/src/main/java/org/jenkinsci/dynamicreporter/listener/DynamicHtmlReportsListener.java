@@ -2,6 +2,7 @@ package org.jenkinsci.dynamicreporter.listener;
 
 import org.apache.commons.io.FileUtils;
 import org.jenkinsci.dynamicreporter.compression.ZipWriter;
+import org.jenkinsci.dynamicreporter.reporting.CustomHTMLReporter;
 import org.jenkinsci.dynamicreporter.transport.IMessageSenderFactory;
 import org.jenkinsci.dynamicreporter.transport.MessageSender;
 import org.jenkinsci.dynamicreporter.transport.SocketMessageSenderFactory;
@@ -11,7 +12,6 @@ import org.testng.ISuite;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
-import org.uncommons.reportng.HTMLReporter;
 import org.uncommons.reportng.ReportNGException;
 
 import java.io.File;
@@ -101,7 +101,7 @@ public class DynamicHtmlReportsListener {
 		if (retriesCount < 1) {
 			return;
 		}
-		HTMLReporter reporter = new HTMLReporter();
+		CustomHTMLReporter reporter = new CustomHTMLReporter();
 		ITestContext testContext = testResult.getTestContext();
 		List<XmlSuite> xmlSuites = Arrays.asList(testContext.getCurrentXmlTest().getSuite());
 		List<ISuite> suites = Arrays.asList(testContext.getSuite());
