@@ -30,12 +30,12 @@ public class DynamicReporterRunAction implements Action {
 
 	@JavaScriptMethod
 	public long getDynamicReporterLastStamp() {
-		Log.info(String.format("Trying to retrieve timestamp from report directory: %s", reportsDirectory.getAbsolutePath()));
+		//Log.info(String.format("Trying to retrieve timestamp from report directory: %s", reportsDirectory.getAbsolutePath()));
 		File[] reportsFiles = reportsDirectory.listFiles();
 		if (reportsFiles != null && reportsFiles.length > 0) {
 			Arrays.sort(reportsFiles, LastModifiedFileComparator.LASTMODIFIED_COMPARATOR);
 			long lastModifiedStamp = reportsFiles[0].lastModified();
-			Log.fine(String.format("Trying to retrieve timestamp from report directory: %s", reportsDirectory.getAbsolutePath()));
+			//Log.fine(String.format("Trying to retrieve timestamp from report directory: %s", reportsDirectory.getAbsolutePath()));
 			return lastModifiedStamp;
 		}
 		return -1;

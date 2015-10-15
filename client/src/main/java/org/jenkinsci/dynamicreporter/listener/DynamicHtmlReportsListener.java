@@ -9,6 +9,7 @@ import org.jenkinsci.dynamicreporter.transport.SocketMessageSenderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ISuite;
+import org.testng.ISuiteResult;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
@@ -25,6 +26,7 @@ public class DynamicHtmlReportsListener {
 	private IMessageSenderFactory messageSenderFactory = new SocketMessageSenderFactory();
 	private static final String ZIP_EXTENSION = ".zip";
 	private static final String TARGET_REPORT_DIRECTORY = "dynamic-reports";
+	private int totalCompleted = 0;
 
 	public void onStart(ITestResult testDetails) {
 	}
@@ -46,10 +48,16 @@ public class DynamicHtmlReportsListener {
 	}
 
 	private synchronized void handleResult(ITestResult testDetails) {
+		int currentCompleted = calculateTotalCompleted(testDetails);
+		log.info(String.format("Got amount of completed tests, before: %s and after: %s ", totalCompleted, currentCompleted));
+		if (currentCompleted == totalCompleted) {
+			return;
+		}
 		MessageSender sender = messageSenderFactory.getMessageSender();
 		try {
 			doHandleResult(testDetails, sender);
 			sender.shutdown();
+			totalCompleted = currentCompleted;
 		} catch (Throwable t) {
 			log.error("Could not handle test result for: {} , Exception: ", testDetails.getName(), t.getCause());
 		}
@@ -129,6 +137,16 @@ public class DynamicHtmlReportsListener {
 
 	public boolean shouldSkip(ITestResult testDetails) {
 		return !Boolean.valueOf(System.getProperty("use.dynamic.reporter"));
+	}
+
+	private int calculateTotalCompleted(ITestResult testResult) {
+		ISuite suite = testResult.getTestContext().getSuite();
+		int completedTests = 0;
+		for (ISuiteResult result : suite.getResults().values()) {
+			completedTests += result.getTestContext().getSkippedTests().size() +
+					result.getTestContext().getFailedTests().size() + result.getTestContext().getPassedTests().size();
+		}
+		return completedTests;
 	}
 
 }

@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>dynamicReporter</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.5</version>
 	<packaging>hpi</packaging>
 	<name>Dynamic Reporter Plugin</name>
 

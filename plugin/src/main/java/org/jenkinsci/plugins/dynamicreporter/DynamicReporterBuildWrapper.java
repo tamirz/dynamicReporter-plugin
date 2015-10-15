@@ -77,6 +77,19 @@ public class DynamicReporterBuildWrapper extends BuildWrapper {
 		StringBuilder link = new StringBuilder().append(JENKINS_HOME).append(File.separator).append("userContent").append(
 				File.separator).append(number);
 		Files.createSymbolicLink(new File(link.toString()).toPath(), new File(targetDirectory.toString()).toPath());
+		createEmptyIndexFile(targetDirectory);
+	}
+
+	private void createEmptyIndexFile(StringBuilder targetDirectory) throws IOException {
+		File emptyIndexFile = new File(targetDirectory.append(File.separator).append("index.html").toString());
+		String content = "<html>\n" +
+							"<head>\n" +
+								"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n" +
+								"<title>Dynamic Reporter</title>\n" +
+							"</head>\n" +
+							"<body><h2>Currently there is no test results, please wait... </h2></body>\n" +
+						"</html>";
+		FileUtils.writeStringToFile(emptyIndexFile, content);
 	}
 
 	/**
